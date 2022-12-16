@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  </head>
+  <body>
+
+    
+    child below:
+    <div>
+      <h3>Received data:</h3>
+      <div id="placeholder"></div>
+    </div>
+    
+    <script>
+    
+      /* DEFINITIONS */
+      var parentWindow = window.parent;
+      
+      /*
+      * RECEIVE MESSAGE FROM PARENT
+      */
+
+      window.addEventListener("message", (e) => {
+        var data = e.data;
+        console.log("RECEIVED message from PARENT TO CHILD", data);
+
+        document.getElementById("placeholder").innerText = data;
+
+      });
+      
+      /* SHAKE HAND WITH PARENT */
+      window.addEventListener("load", () => {
+        parentWindow.postMessage("ko", "*");
+      });
+      
+    </script>
+  </body>
+</html>

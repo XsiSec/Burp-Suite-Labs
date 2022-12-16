@@ -1,0 +1,10 @@
+<iframe src="/" id="iframe"></iframe>
+
+<script>
+  let oldDoc = iframe.contentDocument;
+  iframe.onload = function() {
+    let newDoc = iframe.contentDocument;
+    // the loaded document is not the same as initial!
+    alert(oldDoc == newDoc); // false
+  };
+</script>
