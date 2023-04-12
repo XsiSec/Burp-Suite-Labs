@@ -1,0 +1,8 @@
+Lab #1 - Unprotected admin function
+Find the admin panel and delete the user carlos.
+- testing followning URLS:
+LABXXX.net/
+/admin
+/administrator
+/admin-panel
+/administrator-panel
